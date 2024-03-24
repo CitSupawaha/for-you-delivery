@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:for_you_delivery/utils/constants/image_strings.dart';
 import 'package:for_you_delivery/utils/constants/sizes.dart';
 
@@ -13,9 +12,8 @@ class TLoginHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SvgPicture.asset(
-          Timages.appLogo3,
-          semanticsLabel: 'Acme Logo3',
+        Image.asset(
+          Timages.login,
           height: 150,
         ),
         const SizedBox(
