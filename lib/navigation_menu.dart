@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:for_you_delivery/features/shop/screens/home/home.dart';
-import 'package:for_you_delivery/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -10,11 +9,10 @@ class NavigationMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(NavigationController());
-    final dark = THelperFunctions.isDarkMode(context);
     return Scaffold(
         bottomNavigationBar: Obx(
           () => NavigationBar(
-            height: 80,
+            height: 72,
             elevation: 0,
             selectedIndex: controller.selectedIndex.value,
             onDestinationSelected: (index) =>

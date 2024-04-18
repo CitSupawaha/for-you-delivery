@@ -58,4 +58,8 @@ class TSizes {
 
   //GridView spacing
   static const double gridViewSpacing = 16.0;
+
+  static const double productImageRadius = 16.0;
+  static const double productImageSize = 120.0;
+  static const double productImageHeight = 16.0;
 }

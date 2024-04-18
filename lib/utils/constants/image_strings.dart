@@ -17,5 +17,14 @@ class Timages {
   static const String signup3 = "assets/images/signup3.svg";
   static const String signup4 = "assets/images/signup4.svg";
 
-   static const String login = "assets/logo2.png";
+  static const String product = "assets/images/product.png";
+  static const String product2 = "assets/images/product2.png";
+  static const String product3 = "assets/images/product3.png";
+
+  static const String login = "assets/logo2.png";
+
+  static const String banner = "assets/images/banner.png";
+  static const String banner2 = "assets/images/banner2.png";
+
+  static const String food = "assets/images/food.jpg";
 }
