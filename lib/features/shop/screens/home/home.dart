@@ -7,12 +7,15 @@ import 'package:for_you_delivery/common/widgets/circular_container/circular_cont
 import 'package:for_you_delivery/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:for_you_delivery/common/widgets/images/t_rounded_image.dart';
 import 'package:for_you_delivery/common/widgets/product/product_cards/product_card_vertical.dart';
+import 'package:for_you_delivery/common/widgets/product/product_detail/product_detail.dart';
 import 'package:for_you_delivery/common/widgets/texts/section_heading.dart';
+import 'package:for_you_delivery/data/product/product.dart';
 import 'package:for_you_delivery/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:for_you_delivery/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:for_you_delivery/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:for_you_delivery/utils/constants/image_strings.dart';
 import 'package:for_you_delivery/utils/constants/sizes.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -66,8 +69,11 @@ class HomeScreen extends StatelessWidget {
                     height: TSizes.spaceBtwItems,
                   ),
                   TGridLayout(
-                    itemCount: 4,
-                    itemBuilder: (_, index) => const TProductCardVertical(),
+                    itemCount: products.length,
+                    itemBuilder: (_, index) => TProductCardVertical(
+                        product: products[index],
+                        press: () =>
+                            Get.to(IDetailProduct(product: products[index]))),
                   ),
                 ],
               ),

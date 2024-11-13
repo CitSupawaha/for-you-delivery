@@ -3,21 +3,27 @@ import 'package:for_you_delivery/common/styles/shadows.dart';
 import 'package:for_you_delivery/common/texts/product_title_text.dart';
 import 'package:for_you_delivery/common/widgets/icons/t_circular_icon.dart';
 import 'package:for_you_delivery/common/widgets/images/t_rounded_image.dart';
+import 'package:for_you_delivery/common/widgets/product/product_detail/product_detail.dart';
 import 'package:for_you_delivery/common/widgets/rounded_container/rounded_container.dart';
 import 'package:for_you_delivery/common/widgets/texts/product_price_text.dart';
+import 'package:for_you_delivery/data/product/product.dart';
 import 'package:for_you_delivery/utils/constants/colors.dart';
 import 'package:for_you_delivery/utils/constants/image_strings.dart';
 import 'package:for_you_delivery/utils/constants/sizes.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class TProductCardVertical extends StatelessWidget {
-  const TProductCardVertical({super.key});
+  const TProductCardVertical(
+      {super.key, required this.product, required this.press});
 
+  final Product product;
+  final VoidCallback press;
   @override
   Widget build(BuildContext context) {
     // final dark = THelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () {},
+      onTap: press,
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(2),
@@ -28,17 +34,19 @@ class TProductCardVertical extends StatelessWidget {
         child: Column(
           children: [
             TRoundedContainer(
-              height: 180,
+              height: 150,
               padding: const EdgeInsets.all(TSizes.sm),
-              backgroundColor: Colors.grey.withOpacity(0.1),
+              backgroundColor: product.color.withOpacity(0.1),
               child: Stack(
                 children: [
-                  const TRoundedImage(
-                    imageUrl: Timages.product3,
-                    backgroundColor: Colors.transparent,
-                    applyImageRaduis: true,
-                    width: 160,
-                    height: 180,
+                  Hero(
+                    tag: "${product.id}",
+                    child: Image.asset(
+                      product.image,
+                      width: 150,
+                      height: 150,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   Positioned(
                     top: 0,
@@ -78,12 +86,12 @@ class TProductCardVertical extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const TProductTitleText(
-                    title: "Green Nike Air Shoes",
+                  TProductTitleText(
+                    title: product.title,
                     smallSize: true,
                   ),
                   const SizedBox(
-                    height: TSizes.spaceBtwItems / 2,
+                    height: TSizes.spaceBtwItems / 4,
                   ),
                   Row(
                     children: [
@@ -110,10 +118,10 @@ class TProductCardVertical extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: TSizes.sm),
+                Padding(
+                  padding: const EdgeInsets.only(left: TSizes.sm),
                   child: TProductPriceText(
-                    price: "35",
+                    price: product.price.toString(),
                   ),
                 ),
                 Container(
@@ -124,8 +132,8 @@ class TProductCardVertical extends StatelessWidget {
                           bottomRight:
                               Radius.circular(TSizes.productImageRadius))),
                   child: const SizedBox(
-                    width: TSizes.iconLD * 1.2,
-                    height: TSizes.iconLD * 1.2,
+                    width: TSizes.iconLD * 1, //1.2
+                    height: TSizes.iconLD * 1, //1.2
                     child: Center(
                       child: Icon(
                         Iconsax.add,
