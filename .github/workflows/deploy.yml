@@ -26,12 +26,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # Optional: Clean Flutter cache
       - name: Clean Flutter cache
         run: flutter clean
-
-      - name: Flutter doctor
-        run: flutter doctor
 
       - name: Build Flutter Web
         run: flutter build web --release
