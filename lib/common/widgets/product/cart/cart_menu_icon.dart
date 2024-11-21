@@ -15,6 +15,7 @@ class TCartCounterIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(count);
     return Stack(
       children: [
         IconButton(
@@ -36,7 +37,7 @@ class TCartCounterIcon extends StatelessWidget {
                       borderRadius: BorderRadius.circular(100)),
                   child: Center(
                     child: Text(
-                      '2',
+                      count.toString(),
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!

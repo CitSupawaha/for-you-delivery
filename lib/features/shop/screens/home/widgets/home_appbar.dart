@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:for_you_delivery/common/widgets/appbar/appbar.dart';
 import 'package:for_you_delivery/common/widgets/product/cart/cart_menu_icon.dart';
+import 'package:for_you_delivery/features/cart/screens/order_item/order_item.dart';
+import 'package:for_you_delivery/features/shop/screens/home/controllers.card/cart_controller.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
 class THomeAppbar extends StatelessWidget {
   const THomeAppbar({
@@ -9,6 +14,7 @@ class THomeAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CartController());
     return TAppBar(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,10 +36,12 @@ class THomeAppbar extends StatelessWidget {
         ],
       ),
       actions: [
-        TCartCounterIcon(
-          count: 0,
-          onPressed: () {},
-          iconColor: const Color(0xFF15BE77),
+        Obx(
+          () => TCartCounterIcon(
+            count: controller.cartItem.length,
+            onPressed: () => Get.to(const OrderItemPage()),
+            iconColor: const Color(0xFF15BE77),
+          ),
         )
       ],
     );

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:for_you_delivery/data/product/product.dart';
+import 'package:for_you_delivery/features/shop/screens/home/controllers.card/cart_controller.dart';
 import 'package:for_you_delivery/utils/constants/sizes.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class ColorAndSize extends StatelessWidget {
   const ColorAndSize({super.key, required this.product});
@@ -8,24 +11,26 @@ class ColorAndSize extends StatelessWidget {
   final Product product;
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CartController());
     return Row(
       children: <Widget>[
-        const Expanded(
+        Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text("Color"),
               Row(
                 children: <Widget>[
-                  ColorDot(
-                    color: Color(0xFF356C95),
-                    isSelected: true,
-                  ),
-                  ColorDot(
-                    color: Color(0xFFF8C078),
-                    isSelected: false,
-                  ),
-                  ColorDot(color: Color(0xFFA29B9B), isSelected: false),
+                  // Generate ColorDot widgets dynamically
+                  for (int i = 0; i < colors.length; i++)
+                    Obx(() => ColorDot(
+                          color: colors[i].color,
+                          isSelected:
+                              controller.currentProduct.value.id == i + 1,
+                          onTap: () {
+                            controller.updatePageIndicator(colors[i]);
+                          },
+                        )),
                 ],
               ),
             ],
@@ -54,30 +59,39 @@ class ColorAndSize extends StatelessWidget {
 }
 
 class ColorDot extends StatelessWidget {
-  const ColorDot({super.key, required this.color, required this.isSelected});
+  const ColorDot(
+      {super.key,
+      required this.color,
+      required this.isSelected,
+      required this.onTap});
 
   final Color color;
   final bool isSelected;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(
-        top: TSizes.lg / 4,
-        right: TSizes.lg / 2,
-      ),
-      padding: const EdgeInsets.all(2.5),
-      height: 24,
-      width: 24,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: isSelected ? color : Colors.transparent,
+    print(isSelected);
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(
+          top: TSizes.lg / 4,
+          right: TSizes.lg / 2,
         ),
-      ),
-      child: DecoratedBox(
+        padding: const EdgeInsets.all(2.5),
+        height: 24,
+        width: 24,
         decoration: BoxDecoration(
-          color: color,
           shape: BoxShape.circle,
+          border: Border.all(
+            color: isSelected ? color : Colors.transparent,
+          ),
+        ),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle,
+          ),
         ),
       ),
     );

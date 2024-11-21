@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:for_you_delivery/common/styles/shadows.dart';
 import 'package:for_you_delivery/common/texts/product_title_text.dart';
 import 'package:for_you_delivery/common/widgets/icons/t_circular_icon.dart';
@@ -7,6 +9,7 @@ import 'package:for_you_delivery/common/widgets/product/product_detail/product_d
 import 'package:for_you_delivery/common/widgets/rounded_container/rounded_container.dart';
 import 'package:for_you_delivery/common/widgets/texts/product_price_text.dart';
 import 'package:for_you_delivery/data/product/product.dart';
+import 'package:for_you_delivery/features/shop/screens/home/controllers.card/cart_controller.dart';
 import 'package:for_you_delivery/utils/constants/colors.dart';
 import 'package:for_you_delivery/utils/constants/image_strings.dart';
 import 'package:for_you_delivery/utils/constants/sizes.dart';
@@ -21,19 +24,20 @@ class TProductCardVertical extends StatelessWidget {
   final VoidCallback press;
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CartController());
     // final dark = THelperFunctions.isDarkMode(context);
-    return GestureDetector(
-      onTap: press,
-      child: Container(
-        width: 180,
-        padding: const EdgeInsets.all(2),
-        decoration: BoxDecoration(
-            boxShadow: [TShadowStyle.verticaProductShadow],
-            borderRadius: BorderRadius.circular(TSizes.productImageRadius),
-            color: Colors.white),
-        child: Column(
-          children: [
-            TRoundedContainer(
+    return Container(
+      width: 180,
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+          boxShadow: [TShadowStyle.verticaProductShadow],
+          borderRadius: BorderRadius.circular(TSizes.productImageRadius),
+          color: Colors.white),
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: press,
+            child: TRoundedContainer(
               height: 150,
               padding: const EdgeInsets.all(TSizes.sm),
               backgroundColor: product.color.withOpacity(0.1),
@@ -41,11 +45,14 @@ class TProductCardVertical extends StatelessWidget {
                 children: [
                   Hero(
                     tag: "${product.id}",
-                    child: Image.asset(
-                      product.image,
-                      width: 150,
-                      height: 150,
-                      fit: BoxFit.cover,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        product.image,
+                        width: 140,
+                        height: 140,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
                   Positioned(
@@ -78,53 +85,58 @@ class TProductCardVertical extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(
-              height: TSizes.spaceBtwItems / 2,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: TSizes.sm),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TProductTitleText(
-                    title: product.title,
-                    smallSize: true,
-                  ),
-                  const SizedBox(
-                    height: TSizes.spaceBtwItems / 4,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "Nike",
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                      const SizedBox(
-                        width: TSizes.xs,
-                      ),
-                      const Icon(
-                        Iconsax.verify5,
-                        color: TColors.primaryColor,
-                        size: TSizes.iconXs,
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
+          const SizedBox(
+            height: TSizes.spaceBtwItems / 2,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: TSizes.sm),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: TSizes.sm),
-                  child: TProductPriceText(
-                    price: product.price.toString(),
-                  ),
+                TProductTitleText(
+                  title: product.title,
+                  smallSize: true,
                 ),
-                Container(
+                const SizedBox(
+                  height: TSizes.spaceBtwItems / 4,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Nike",
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                    const SizedBox(
+                      width: TSizes.xs,
+                    ),
+                    const Icon(
+                      Iconsax.verify5,
+                      color: TColors.primaryColor,
+                      size: TSizes.iconXs,
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: TSizes.sm),
+                child: TProductPriceText(
+                  price: product.price.toString(),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  controller.addToCart(product);
+                },
+                child: Container(
                   decoration: const BoxDecoration(
                       color: TColors.dark,
                       borderRadius: BorderRadius.only(
@@ -141,11 +153,11 @@ class TProductCardVertical extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
-              ],
-            )
-          ],
-        ),
+                ),
+              )
+            ],
+          )
+        ],
       ),
     );
   }

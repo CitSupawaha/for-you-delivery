@@ -10,6 +10,7 @@ import 'package:for_you_delivery/common/widgets/product/product_cards/product_ca
 import 'package:for_you_delivery/common/widgets/product/product_detail/product_detail.dart';
 import 'package:for_you_delivery/common/widgets/texts/section_heading.dart';
 import 'package:for_you_delivery/data/product/product.dart';
+import 'package:for_you_delivery/features/shop/screens/home/controllers.card/cart_controller.dart';
 import 'package:for_you_delivery/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:for_you_delivery/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:for_you_delivery/features/shop/screens/home/widgets/promo_slider.dart';
