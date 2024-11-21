@@ -30,7 +30,7 @@ jobs:
         run: flutter clean
 
       - name: Build Flutter Web (No Tree Shake Icons)
-        run: flutter build web --release --no-tree-shake-icons
+        run: flutter build web --web-renderer html --release --no-tree-shake-icons
 
       - name: Upload Web Build
         uses: actions/upload-artifact@v3
