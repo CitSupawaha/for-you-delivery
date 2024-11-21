@@ -21,15 +21,25 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: "3.24.5"
+          clean: true
 
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build Flutter Web
-        run: flutter build web --release
+      - name: Clean Flutter build cache
+        run: flutter clean
+
+      - name: Build Flutter Web (No Tree Shake Icons)
+        run: flutter build web --release --no-tree-shake-icons
+
+      - name: Upload Web Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: flutter-web-build
+          path: build/web
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_TOKEN }} # Make sure to use the correct token
+          github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: build/web
