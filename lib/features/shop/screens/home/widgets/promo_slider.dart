@@ -4,7 +4,6 @@ import 'package:for_you_delivery/common/widgets/circular_container/circular_cont
 import 'package:for_you_delivery/common/widgets/images/t_rounded_image.dart';
 import 'package:for_you_delivery/features/shop/controllers/home_controller.dart';
 import 'package:for_you_delivery/utils/constants/colors.dart';
-import 'package:for_you_delivery/utils/constants/image_strings.dart';
 import 'package:for_you_delivery/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
