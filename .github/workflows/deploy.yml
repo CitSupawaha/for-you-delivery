@@ -3,10 +3,10 @@ name: Flutter CI/CD
 on:
   push:
     branches:
-      - main # Run workflow on pushes to the 'main' branch
+      - main
   pull_request:
     branches:
-      - main # Run workflow for pull requests to the 'main' branch
+      - main
 
 jobs:
   build:
@@ -14,32 +14,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout Code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Flutter
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: stable # Use stable Flutter version
+          flutter-version: "3.24.5" # Stable Flutter version
+          clean: true
 
-      # Step 3: Install dependencies
       - name: Install dependencies
         run: flutter pub get
 
-      # Step 4: Run Flutter build for web
+      # Optional: Clean Flutter cache
+      - name: Clean Flutter cache
+        run: flutter clean
+
+      - name: Flutter doctor
+        run: flutter doctor
+
       - name: Build Flutter Web
         run: flutter build web --release
 
-      # Step 5: Upload build output as artifact (Optional)
       - name: Upload Web Build
         uses: actions/upload-artifact@v3
         with:
           name: flutter-web-build
           path: build/web
 
-      # Step 6: Deploy to GitHub Pages (Optional)
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
