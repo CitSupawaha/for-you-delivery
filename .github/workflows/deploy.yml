@@ -20,17 +20,17 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.24.5" # Stable Flutter version
+          flutter-version: "3.24.5"
           clean: true
 
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Clean Flutter cache
+      - name: Clean Flutter build cache
         run: flutter clean
 
-      - name: Build Flutter Web
-        run: flutter build web --release
+      - name: Build Flutter Web (No Tree Shake Icons)
+        run: flutter build web --release --no-tree-shake-icons
 
       - name: Upload Web Build
         uses: actions/upload-artifact@v3
