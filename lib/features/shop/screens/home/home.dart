@@ -1,16 +1,10 @@
-import 'dart:ffi';
-
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:for_you_delivery/common/layouts/grid_layout.dart';
-import 'package:for_you_delivery/common/widgets/circular_container/circular_container.dart';
 import 'package:for_you_delivery/common/widgets/custom_shapes/containers/search_container.dart';
-import 'package:for_you_delivery/common/widgets/images/t_rounded_image.dart';
 import 'package:for_you_delivery/common/widgets/product/product_cards/product_card_vertical.dart';
 import 'package:for_you_delivery/common/widgets/product/product_detail/product_detail.dart';
 import 'package:for_you_delivery/common/widgets/texts/section_heading.dart';
 import 'package:for_you_delivery/data/product/product.dart';
-import 'package:for_you_delivery/features/shop/screens/home/controllers.card/cart_controller.dart';
 import 'package:for_you_delivery/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:for_you_delivery/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:for_you_delivery/features/shop/screens/home/widgets/promo_slider.dart';
